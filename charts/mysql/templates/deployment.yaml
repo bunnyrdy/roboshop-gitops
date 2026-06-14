@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels: { app: mysql, project: roboshop, tier: db }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: mysql, project: roboshop, tier: db }
+  template:
+    metadata:
+      labels: { app: mysql, project: roboshop, tier: db }
+    spec:
+      containers:
+        - name: mysql
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "{{ .Values.auth.rootPassword }}"
+          ports:
+            - containerPort: 3306

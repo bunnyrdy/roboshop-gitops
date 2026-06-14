@@ -1,0 +1,5 @@
+image:
+  repository: mysql
+  tag: "8.0"
+auth:
+  rootPassword: "RoboShop@1"

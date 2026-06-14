@@ -1,0 +1,6 @@
+image:
+  repository: rabbitmq
+  tag: "3-management"
+auth:
+  user: roboshop
+  password: roboshop123

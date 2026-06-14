@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq
+  labels: { app: rabbitmq, project: roboshop, tier: db }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: rabbitmq, project: roboshop, tier: db }
+  template:
+    metadata:
+      labels: { app: rabbitmq, project: roboshop, tier: db }
+    spec:
+      containers:
+        - name: rabbitmq
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "{{ .Values.auth.user }}"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "{{ .Values.auth.password }}"
+          ports:
+            - containerPort: 5672
+            - containerPort: 15672

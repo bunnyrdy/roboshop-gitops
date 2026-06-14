@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels: { app: mongodb, project: roboshop, tier: db }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: mongodb, project: roboshop, tier: db }
+  template:
+    metadata:
+      labels: { app: mongodb, project: roboshop, tier: db }
+    spec:
+      containers:
+        - name: mongodb
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: seed
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: seed
+          configMap:
+            name: mongodb-seed
