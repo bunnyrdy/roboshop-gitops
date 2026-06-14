@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/bunnyrdy/roboshop-gitops.git
     targetRevision: main
-    path: charts/catalogue-deploy
+    path: charts/catalogue-deploy/helm
   destination:
     server: https://kubernetes.default.svc
     namespace: roboshop
