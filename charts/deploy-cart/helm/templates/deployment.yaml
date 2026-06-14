@@ -25,6 +25,7 @@ spec:
       containers:
       - name: cart
         image: {{ .Values.deployment.imageURL }}:{{ .Values.deployment.imageVersion }}
+        imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
             name: cart
