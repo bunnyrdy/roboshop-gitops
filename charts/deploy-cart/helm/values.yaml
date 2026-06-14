@@ -1,0 +1,4 @@
+deployment:
+  replicas: 1
+  imageURL: 000000000000.dkr.ecr.us-east-1.localhost:5100/roboshop/cart 
+  imageVersion: "1.0.0"
